@@ -7,7 +7,7 @@ resource "databricks_sql_visualization" "bar_vis" {
 
 resource "databricks_sql_widget" "bar_widget" {
   visualization_id = databricks_sql_visualization.bar_vis.visualization_id
-  title            = "Bar 1 - Demo visualizations"
+  title            = "Bar - Demo visualizations"
   position {
     size_y = 8
     size_x = 3
@@ -18,7 +18,7 @@ resource "databricks_sql_widget" "bar_widget" {
 
 resource "databricks_sql_widget" "map_widget" {
   visualization_id = databricks_sql_visualization.map_vis.visualization_id
-  title            = "Map (Choropleth) 2 - Demo visualizations"
+  title            = "Map (Choropleth) - Demo visualizations"
   position {
     size_y = 8
     size_x = 6
