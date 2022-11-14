@@ -66,8 +66,8 @@ resource "databricks_job" "many_tasks_example" {
   job_cluster {
     new_cluster {
       spark_version = data.databricks_spark_version.latest_lts.id
-      num_workers         = 2
-      node_type_id        = data.databricks_node_type.smallest.id
+      num_workers   = 2
+      node_type_id  = data.databricks_node_type.smallest.id
     }
     job_cluster_key = "Shared_job_cluster"
   }
