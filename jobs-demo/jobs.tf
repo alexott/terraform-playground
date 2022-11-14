@@ -72,3 +72,7 @@ resource "databricks_job" "many_tasks_example" {
     job_cluster_key = "Shared_job_cluster"
   }
 }
+
+output "job_url" {
+  value = databricks_job.many_tasks_example.url
+}
