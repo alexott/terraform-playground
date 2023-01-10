@@ -47,3 +47,4 @@ resource "databricks_job" "this" {
     notebook_path = databricks_notebook.this.path
   }
 }
+
