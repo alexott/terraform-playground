@@ -111,7 +111,7 @@ resource "azurerm_data_factory_pipeline" "pipeline" {
             {
                 "activity": "Notebook_MSI",
                 "dependencyConditions": [
-                    "Skipped"
+                    "Succeeded"
                 ]
             }
         ],
@@ -125,6 +125,44 @@ resource "azurerm_data_factory_pipeline" "pipeline" {
     },
     {
         "name": "Notebook_PAT_in_AKV",
+        "type": "DatabricksNotebook",
+        "dependsOn": [
+            {
+                "activity": "Notebook_PAT",
+                "dependencyConditions": [
+                    "Succeeded"
+                ]
+            }
+        ],
+        "typeProperties": {
+            "notebookPath": "${databricks_notebook.adf_notebook.path}"
+        },
+        "linkedServiceName": {
+            "referenceName": "${azurerm_data_factory_linked_service_azure_databricks.akv_pat_linked.name}",
+            "type": "LinkedServiceReference"
+        }
+    },
+    {
+        "name": "Notebook_On_Failure",
+        "type": "DatabricksNotebook",
+        "dependsOn": [
+            {
+                "activity": "Notebook_PAT",
+                "dependencyConditions": [
+                    "Failed"
+                ]
+            }
+        ],
+        "typeProperties": {
+            "notebookPath": "${databricks_notebook.adf_notebook.path}"
+        },
+        "linkedServiceName": {
+            "referenceName": "${azurerm_data_factory_linked_service_azure_databricks.akv_pat_linked.name}",
+            "type": "LinkedServiceReference"
+        }
+    },
+    {
+        "name": "Notebook_On_Skip",
         "type": "DatabricksNotebook",
         "dependsOn": [
             {
