@@ -2,11 +2,11 @@
 variable "groups" {
   description = "Map of AAD group names into object describing workspace & Databricks SQL access permissions"
   type = map(object({
-    workspace_access = bool
-    databricks_sql_access = bool
-    allow_cluster_create = bool
+    workspace_access           = bool
+    databricks_sql_access      = bool
+    allow_cluster_create       = bool
     allow_instance_pool_create = bool
-    admin = bool  # if this group for Databricks admins
+    admin                      = bool # if this group for Databricks admins
   }))
 }
 

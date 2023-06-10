@@ -19,9 +19,9 @@ data "databricks_spark_version" "latest_lts" {
 }
 
 data "databricks_node_type" "this" {
-  local_disk            = true
-  min_cores             = 8
-  category              = "Compute Optimized"
+  local_disk = true
+  min_cores  = 8
+  category   = "Compute Optimized"
 }
 
 resource "databricks_notebook" "this" {
