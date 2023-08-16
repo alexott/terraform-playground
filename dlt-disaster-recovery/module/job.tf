@@ -9,7 +9,7 @@ resource "databricks_job" "dlt_pipeline" {
   schedule {
     quartz_cron_expression = "0 0 1 * * ?"
     timezone_id            = "UTC"
-    pause_status           = var.active_region ? "UNPAUSED" : "PAUSED"
+    pause_status           = var.active_region ? "PAUSED" : "UNPAUSED"
   }
 }
 
