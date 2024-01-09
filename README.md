@@ -7,6 +7,7 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [akv-to-db-secrets](akv-to-db-secrets) shows how to replicate secrets from Azure Key Vault into the Databricks Secrets scope (for example, to access them in another cloud)
 * [cloud-agnostic](cloud-agnostic) shows how to create cloud agnostic deployments of Databricks resources. See the [blog post](https://alexott.blogspot.com/2022/11/cloud-agnostic-resources-deployment.html) for more details about it.
 * [cluster-init-script-on-abfss](cluster-init-script-on-abfss) shows how to configure cluster to use init script from the Azure Storage Account (using `abfss` protocol)
+* [databricks-modules-demo1](databricks-modules-demo1) shows how to use Databricks modules to provision Azure Databricks workspace.
 * [dbsql-demo](dbsql-demo) demonstrates how to use Terraform to create Databricks SQL resources - SQL Warehouse, queries and dashboards.
 * [dlt-disaster-recovery](dlt-disaster-recovery) contains example of Terraform deployment for DLT Pipeline with Disaster Recovery (DR) used in the blog post [Production-Ready and Resilient Disaster Recovery for DLT Pipelines](https://www.databricks.com/blog/2023/03/17/production-ready-and-resilient-disaster-recovery-dlt-pipelines.html).
 * [dlt-on-abfss](dlt-on-abfss) shows how to configure Delta Live Table (DLT) pipeline to store data in Azure Storage (ABFSS protocol).
