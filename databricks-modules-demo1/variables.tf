@@ -1,3 +1,9 @@
+variable "create_resource_group" {
+  type        = bool
+  description = "(Optional) Creates resource group if set to true (default)"
+  default     = true
+}
+
 variable "location" {
   type        = string
   description = "(Required) The location for the resources in this module"

@@ -5,7 +5,23 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">=3.0.0"
     }
+    databricks = {
+      source = "databricks/databricks"
+      version = "1.34.0"
+    }
   }
+}
+
+provider "databricks" {
+  host = azurerm_databricks_workspace.example.workspace_url
+}
+
+data "databricks_current_user" "me" {
+  depends_on = [azurerm_databricks_workspace.example]
+}
+
+output "user" {
+  value = data.databricks_current_user.me
 }
 
 provider "azurerm" {
