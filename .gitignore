@@ -29,3 +29,4 @@ override.tf.json
 # example: *tfplan*
 *~
 /databricks-modules-demo1/terraform.tfvars_with_uc
+*.log
