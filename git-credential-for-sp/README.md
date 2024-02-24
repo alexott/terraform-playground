@@ -12,7 +12,6 @@ Notes:
 * Fill the `terraform.tfvars` file with necessary variables (supported values for `git_service` are listed in the [REST API docs](https://docs.databricks.com/api/workspace/gitcredentials/create)):
 
 ```hcl
-db_host      = "https://nnnnn.cloud.databricks.com"
 sp_name      = "TF Test example"
 git_service  = "gitHub"
 git_username = "test"
