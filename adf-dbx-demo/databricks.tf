@@ -31,7 +31,7 @@ resource "databricks_instance_pool" "adf" {
 
 resource "databricks_service_principal" "adf_mi" {
   display_name         = "${var.adf_name} managed identity"
-  application_id       = data.azuread_service_principal.adf.application_id
+  application_id       = data.azuread_service_principal.adf.client_id
   allow_cluster_create = true
 }
 

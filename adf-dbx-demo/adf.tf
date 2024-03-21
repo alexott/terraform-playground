@@ -13,7 +13,7 @@ resource "azurerm_data_factory" "this" {
 # }
 
 output "mi_client_id" {
-  value = data.azuread_service_principal.adf.application_id
+  value = data.azuread_service_principal.adf.client_id
 }
 
 data "azuread_service_principal" "adf" {
