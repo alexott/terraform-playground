@@ -87,7 +87,7 @@ resource "azurerm_role_assignment" "disks" {
   principal_id         = azurerm_databricks_workspace.this.managed_disk_identity.0.principal_id
 }
 
-# will be used for next resource
+# will be used for giving access to Databricks application
 data "azuread_service_principal" "databricks" {
   client_id = "2ff814a6-3304-4ab8-85cb-cd0e6f879c1d"
 }
@@ -99,6 +99,7 @@ resource "azurerm_role_assignment" "managed_keys" {
   principal_id         = data.azuread_service_principal.databricks.object_id
 }
 
+# To access secrets via Databricks secrets scope
 resource "azurerm_role_assignment" "managed_secrets" {
   scope                = azurerm_key_vault.this.id
   role_definition_name = "Key Vault Secrets User"
