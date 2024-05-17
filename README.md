@@ -3,6 +3,7 @@
 Different snippets of Terraform code. Primarily around Databricks:
 
 * [aad-dbx-sync](aad-dbx-sync) allows to synchronize users/groups/service principals from Azure Active Directory into Databricks Workspace.
+* [adb-workspace-cmk-rbac](adb-workspace-cmk-rbac) shows how to create Azure Databricks workspace with Customer Managed Keys encryption enabled that uses Azure Key Vault with RBAC enabled instead of Access policies.
 * [adf-dbx-demo](adf-dbx-demo) shows how to configure different authentication methods for Azure Data Factory links to Azure Databricks.
 * [akv-to-db-secrets](akv-to-db-secrets) shows how to replicate secrets from Azure Key Vault into the Databricks Secrets scope (for example, to access them in another cloud)
 * [cloud-agnostic](cloud-agnostic) shows how to create cloud agnostic deployments of Databricks resources. See the [blog post](https://alexott.blogspot.com/2022/11/cloud-agnostic-resources-deployment.html) for more details about it.
@@ -15,3 +16,4 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [git-credential-for-sp](git-credential-for-sp) shows how to set Git credential for Databricks Service Principal on AWS or GCP.
 * [git-proxy](git-proxy) shows how to set up a Databricks Git Proxy cluster for connectivity to the private Git repositories.
 * [jobs-demo](jobs-demo) demonstrate how to create a simple Databricks workflow with multiple tasks inside.
+* [plan-changes](plan-changes) script that shows a summary of Terraform plan changes
