@@ -14,13 +14,9 @@ data "databricks_node_type" "smallest" {
   local_disk = true
 }
 
-data "databricks_spark_version" "latest_lts" {
-  long_term_support = true
-}
-
 resource "databricks_cluster" "git_proxy" {
   cluster_name            = "Git Proxy"
-  spark_version           = data.databricks_spark_version.latest_lts.id
+  spark_version           = "12.2.x-scala2.12"
   node_type_id            = data.databricks_node_type.smallest.id
   autotermination_minutes = 0
 
