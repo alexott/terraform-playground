@@ -9,7 +9,8 @@ databricks_workspace_name       = "exporter-perf-test"
 create_resource_group           = false
 tags = {
   Owner       = "alexey.ott@databricks.com",
-  RemoveAfter = "2024-03-31",
+  RemoveAfter = "2024-09-30",
+  Purpose = "CapitalOne DR Escalation",
 }
 # This will be uncommented as part of the demo
 # account_id   = "..."
