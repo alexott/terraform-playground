@@ -16,8 +16,15 @@ output "mi_client_id" {
   value = data.azuread_service_principal.adf.client_id
 }
 
+# we need to wait a bit to make MI registered in Entra ID
+resource "time_sleep" "wait_10_seconds" {
+  depends_on = [azurerm_data_factory.this]
+  create_duration = "10s"
+}
+
 data "azuread_service_principal" "adf" {
-  object_id = azurerm_data_factory.this.identity[0].principal_id
+  depends_on = [time_sleep.wait_10_seconds]
+  object_id  = azurerm_data_factory.this.identity[0].principal_id
 }
 
 
