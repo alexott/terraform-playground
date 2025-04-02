@@ -12,23 +12,12 @@ resource "databricks_notebook" "test2" {
   path   = "${databricks_directory.demo_directory.path}/Test2"
 }
 
-resource "databricks_notebook" "test3" {
+resource "databricks_notebook" "cleanup" {
   source = "${path.module}/notebooks/Test.py"
-  path   = "${databricks_directory.demo_directory.path}/Test4"
+  path   = "${databricks_directory.demo_directory.path}/Cleanup_on_failure"
 }
 
-resource "databricks_notebook" "test4" {
-  source = "${path.module}/notebooks/Test.py"
-  path   = "${databricks_directory.demo_directory.path}/Test4"
+resource "databricks_notebook" "dlt" {
+  source = "${path.module}/notebooks/DltTest.py"
+  path   = "${databricks_directory.demo_directory.path}/DLTTest"
 }
-
-resource "databricks_notebook" "test5" {
-  source = "${path.module}/notebooks/Test.py"
-  path   = "${databricks_directory.demo_directory.path}/Test5"
-}
-
-resource "databricks_notebook" "test6" {
-  source = "${path.module}/notebooks/Test.py"
-  path   = "${databricks_directory.demo_directory.path}/Test6"
-}
-

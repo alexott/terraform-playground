@@ -1,68 +1,58 @@
 resource "databricks_job" "many_tasks_example" {
   task {
-    task_key = "Task1"
+    task_key = "Task_Job_Cluster"
     notebook_task {
       notebook_path = databricks_notebook.test1.id
     }
     job_cluster_key = "Shared_job_cluster"
   }
   task {
-    task_key = "Task2"
+    task_key = "Task_Serverless"
     notebook_task {
       notebook_path = databricks_notebook.test2.id
     }
-    job_cluster_key = "Shared_job_cluster"
+  }
+  task {
+    task_key = "DLT"
+    pipeline_task {
+      pipeline_id = databricks_pipeline.dlt.id
+    }
     depends_on {
-      task_key = "Task1"
+      task_key = "Task_Job_Cluster"
+    }
+    depends_on {
+      task_key = "Task_Serverless"
     }
   }
   task {
-    task_key = "Task3"
+    task_key = "Cleanup_on_failure"
+    run_if   = "AT_LEAST_ONE_FAILED"
     notebook_task {
-      notebook_path = databricks_notebook.test3.id
+      notebook_path = databricks_notebook.cleanup.id
     }
-    job_cluster_key = "Shared_job_cluster"
     depends_on {
-      task_key = "Task1"
+      task_key = "DLT"
     }
   }
   task {
-    task_key = "Task4"
-    notebook_task {
-      notebook_path = databricks_notebook.test4.id
+    task_key = "Trigger_alert"
+    sql_task {
+      warehouse_id = databricks_sql_endpoint.this.id
+      alert {
+        subscriptions {
+          user_name = "alexey.ott@databricks.com"
+        }
+        pause_subscriptions = true
+        alert_id            = databricks_alert.this.id
+      }
     }
-    job_cluster_key = "Shared_job_cluster"
+    run_if = "ALL_SUCCESS"
     depends_on {
-      task_key = "Task3"
-    }
-    depends_on {
-      task_key = "Task2"
+      task_key = "DLT"
     }
   }
-  task {
-    task_key = "Task5"
-    notebook_task {
-      notebook_path = databricks_notebook.test5.id
-    }
-    job_cluster_key = "Shared_job_cluster"
-    depends_on {
-      task_key = "Task3"
-    }
-  }
-  task {
-    task_key = "Task6"
-    notebook_task {
-      notebook_path = databricks_notebook.test6.id
-    }
-    job_cluster_key = "Shared_job_cluster"
-    depends_on {
-      task_key = "Task4"
-    }
-    depends_on {
-      task_key = "Task5"
-    }
-  }
-  name = "Job with multiple tasks example"
+
+  name = "Demo: Job with multiple tasks"
   job_cluster {
     new_cluster {
       spark_version = data.databricks_spark_version.latest_lts.id
@@ -71,6 +61,15 @@ resource "databricks_job" "many_tasks_example" {
     }
     job_cluster_key = "Shared_job_cluster"
   }
+
+  trigger {
+    periodic {
+      unit     = "DAYS"
+      interval = 1
+    }
+    pause_status = "PAUSED"
+  }
+
 }
 
 output "job_url" {
