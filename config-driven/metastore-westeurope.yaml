@@ -1,0 +1,59 @@
+config:
+  uc_admin_workspace: "https://adb-12345.17.azuredatabricks.net"
+
+metastore:
+  #create: true
+  location: westeurope
+  name: "aott-uc-metastore"
+  owner: "Metastore Admins"
+  workspaces:
+    - 124356
+    - 567890
+
+# TODO: add workspace bindings
+storage_credentials:
+  - 
+    name: "bu1"
+    owner: "Metastore Admins"
+    azure_managed_identity:
+      access_connector_id: "resource ID"
+    grants:
+      - 
+        principal: "BU1 Prod Admins"
+        privileges:
+          - "CREATE_EXTERNAL_LOCATION"
+
+# TODO: add workspace bindings
+external_locations:
+  - 
+    name: "bu1_dev"
+    credential_name: "bu1"
+    url: "abfss://dev@test.dfs.core.windows.net/"
+    grants:
+      - 
+        principal: "BU1 Prod Admins"
+        privileges:
+          - "CREATE_MANAGED_STORAGE"
+          - "CREATE_EXTERNAL_TABLE"
+          - "CREATE_EXTERNAL_VOLUME"
+  - 
+    name: "bu1_prod"
+    credential_name: "bu1"
+    url: "abfss://prod@test.dfs.core.windows.net/"
+
+catalogs:
+  - 
+    name: bu1_dev
+    owner: "BU1 Dev Admins"
+    storage_root: "${external_location.bu1_dev.url}"
+  - 
+    name: bu1_prod
+    owner: "BU1 Prod Admins"
+    storage_root: "${external_location.bu1_prod.url}"
+    workspaces:
+      - 
+        id: 123456
+        read_only: true
+      - 
+        id: 567890
+    

@@ -30,3 +30,4 @@ override.tf.json
 *~
 /databricks-modules-demo1/terraform.tfvars_with_uc
 *.log
+/tf-docs
