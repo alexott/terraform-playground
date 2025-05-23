@@ -10,7 +10,7 @@ metastore:
     - 124356
     - 567890
 
-# TODO: add workspace bindings
+# list item can also have `workspaces`
 storage_credentials:
   - 
     name: "bu1"
@@ -23,7 +23,20 @@ storage_credentials:
         privileges:
           - "CREATE_EXTERNAL_LOCATION"
 
-# TODO: add workspace bindings
+# list item can also have `workspaces`
+credentials:
+  - 
+    name: "bu1"
+    owner: "Metastore Admins"
+    azure_managed_identity:
+      access_connector_id: "resource ID"
+    grants:
+      - 
+        principal: "BU1 Prod Admins"
+        privileges:
+          - "ALL_PRIVILEGES"
+
+# list item can also have `workspaces`
 external_locations:
   - 
     name: "bu1_dev"
@@ -39,17 +52,28 @@ external_locations:
   - 
     name: "bu1_prod"
     credential_name: "bu1"
-    url: "abfss://prod@test.dfs.core.windows.net/"
+    url: "abfss://dev@test.dfs.core.windows.net/"
 
 catalogs:
   - 
     name: bu1_dev
     owner: "BU1 Dev Admins"
-    storage_root: "${external_location.bu1_dev.url}"
+    storage_root: "abfss://dev@test.dfs.core.windows.net/"
+    grants:
+      - 
+        principal: "account users"
+        privileges:
+          - BROWSE
+          - USE_CATALOG
   - 
     name: bu1_prod
     owner: "BU1 Prod Admins"
-    storage_root: "${external_location.bu1_prod.url}"
+    storage_root: "abfss://dev@test.dfs.core.windows.net/"
+    grants:
+      - 
+        principal: "prod users"
+        privileges:
+          - USE_CATALOG
     workspaces:
       - 
         id: 123456

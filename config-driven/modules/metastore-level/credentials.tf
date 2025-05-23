@@ -1,25 +1,26 @@
 locals {
-  storage_credentials      = lookup(var.config, "storage_credentials", [])
-  storage_credentials_info = { for k in local.storage_credentials : k.name => k }
+  service_credentials      = lookup(var.config, "credentials", [])
+  service_credentials_info = { for k in local.service_credentials : k.name => k }
 
-  storage_credentials_bindings_tmp = { for k, v in local.storage_credentials_info : k => lookup(v, "workspaces", []) if length(lookup(v, "workspaces", [])) > 0 }
+  service_credentials_bindings_tmp = { for k, v in local.service_credentials_info : k => lookup(v, "workspaces", []) if length(lookup(v, "workspaces", [])) > 0 }
   # TODO: add the current workspace into this list, but we don't have data source for that
-  storage_credentials_bindings = flatten([for k, v in local.storage_credentials_bindings_tmp : [
+  service_credentials_bindings = flatten([for k, v in local.service_credentials_bindings_tmp : [
     for w in v : jsonencode({
-      external_location = k
-      workspace         = w.id
-      read_only         = lookup(w, "read_only", false)
+      service_credential = k
+      workspace          = w.id
+      read_only          = lookup(w, "read_only", false)
     })
   ]])
 
 }
 
-resource "databricks_storage_credential" "this" {
-  for_each = local.storage_credentials_info
+resource "databricks_credential" "this" {
+  for_each = local.service_credentials_info
 
   name    = each.value.name
   owner   = lookup(each.value, "owner", null)
   comment = lookup(each.value, "comment", null)
+  purpose = lookup(each.value, "purpose", "SERVICE")
 
   dynamic "azure_managed_identity" {
     for_each = lookup(each.value, "azure_managed_identity", null) == null ? {} : {
@@ -41,10 +42,10 @@ resource "databricks_storage_credential" "this" {
   }
 }
 
-resource "databricks_grants" "storage_credentials" {
-  for_each = { for k, v in local.storage_credentials_info : k => v if lookup(v, "grants", null) != null }
+resource "databricks_grants" "service_credentials" {
+  for_each = { for k, v in local.service_credentials_info : k => v if lookup(v, "grants", null) != null }
 
-  storage_credential = each.key
+  credential = each.key
 
   dynamic "grant" {
     for_each = { for k in lookup(each.value, "grants", []) : k.principal => k.privileges }
@@ -55,10 +56,10 @@ resource "databricks_grants" "storage_credentials" {
   }
 }
 
-resource "databricks_workspace_binding" "storage_credentials" {
-  for_each       = toset(local.storage_credentials_bindings)
+resource "databricks_workspace_binding" "service_credentials" {
+  for_each       = toset(local.service_credentials_bindings)
   securable_name = jsondecode(each.value).storage_credential
   workspace_id   = jsondecode(each.value).workspace
   binding_type   = jsondecode(each.value).read_only ? "BINDING_TYPE_READ_ONLY" : "BINDING_TYPE_READ_WRITE"
-  securable_type = "storage_credential"
+  securable_type = "credential"
 }
