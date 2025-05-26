@@ -42,7 +42,8 @@ resource "databricks_storage_credential" "this" {
 }
 
 resource "databricks_grants" "storage_credentials" {
-  for_each = { for k, v in local.storage_credentials_info : k => v if lookup(v, "grants", null) != null }
+  for_each   = { for k, v in local.storage_credentials_info : k => v if lookup(v, "grants", null) != null }
+  depends_on = [databricks_storage_credential.this]
 
   storage_credential = each.key
 
@@ -56,7 +57,9 @@ resource "databricks_grants" "storage_credentials" {
 }
 
 resource "databricks_workspace_binding" "storage_credentials" {
-  for_each       = toset(local.storage_credentials_bindings)
+  for_each   = toset(local.storage_credentials_bindings)
+  depends_on = [databricks_storage_credential.this]
+
   securable_name = jsondecode(each.value).storage_credential
   workspace_id   = jsondecode(each.value).workspace
   binding_type   = jsondecode(each.value).read_only ? "BINDING_TYPE_READ_ONLY" : "BINDING_TYPE_READ_WRITE"
