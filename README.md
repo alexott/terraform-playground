@@ -8,6 +8,7 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [ado-adb-sp-git](ado-adb-sp-git) shows how to set credentials federation for Azure Service Principal to connect to Azure DevOps repository from Databricks.
 * [akv-to-db-secrets](akv-to-db-secrets) shows how to replicate secrets from Azure Key Vault into the Databricks Secrets scope (for example, to access them in another cloud).
 * [azure-hub-spokes-multiple-ws](azure-hub-spokes-multiple-ws) shows possible multi-module organization for deployment of Azure Databricks workspaces in hub-and-spoke architecture with separation of prod and dev workspaces, together with groups assignments to specific workspace, creation of shared resources, etc.
+* [config-driven](config-driven) demonstrates provisioning of Unity Catalog resources driven by the config file.
 * [cloud-agnostic](cloud-agnostic) shows how to create cloud agnostic deployments of Databricks resources. See the [blog post](https://alexott.blogspot.com/2022/11/cloud-agnostic-resources-deployment.html) for more details about it.
 * [cluster-init-script-on-abfss](cluster-init-script-on-abfss) shows how to configure cluster to use init script from the Azure Storage Account (using `abfss` protocol)
 * [databricks-modules-demo1](databricks-modules-demo1) shows how to use Databricks modules to provision Azure Databricks workspace.
