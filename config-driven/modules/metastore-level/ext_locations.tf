@@ -15,7 +15,8 @@ locals {
 }
 
 resource "databricks_external_location" "this" {
-  for_each = local.ext_locations_info
+  for_each   = local.ext_locations_info
+  depends_on = [databricks_storage_credential.this]
 
   name            = each.value.name
   comment         = lookup(each.value, "comment", null)
@@ -26,7 +27,8 @@ resource "databricks_external_location" "this" {
 }
 
 resource "databricks_grants" "external_locations" {
-  for_each = { for k, v in local.ext_locations_info : k => v if lookup(v, "grants", null) != null }
+  for_each   = { for k, v in local.ext_locations_info : k => v if lookup(v, "grants", null) != null }
+  depends_on = [databricks_external_location.this]
 
   external_location = each.key
 
@@ -40,7 +42,9 @@ resource "databricks_grants" "external_locations" {
 }
 
 resource "databricks_workspace_binding" "ext_locations" {
-  for_each       = toset(local.ext_locations_bindings)
+  for_each   = toset(local.ext_locations_bindings)
+  depends_on = [databricks_external_location.this]
+
   securable_name = jsondecode(each.value).external_location
   workspace_id   = jsondecode(each.value).workspace
   binding_type   = jsondecode(each.value).read_only ? "BINDING_TYPE_READ_ONLY" : "BINDING_TYPE_READ_WRITE"

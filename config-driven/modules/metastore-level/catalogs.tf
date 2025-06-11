@@ -17,6 +17,8 @@ locals {
 resource "databricks_catalog" "this" {
   for_each = local.catalogs_info
 
+  depends_on = [databricks_external_location.this]
+
   name           = each.value.name
   comment        = lookup(each.value, "comment", null)
   owner          = lookup(each.value, "owner", null)
@@ -28,7 +30,9 @@ resource "databricks_catalog" "this" {
 }
 
 resource "databricks_workspace_binding" "catalogs" {
-  for_each       = toset(local.catalogs_bindings)
+  for_each   = toset(local.catalogs_bindings)
+  depends_on = [databricks_catalog.this]
+
   securable_name = jsondecode(each.value).catalog
   workspace_id   = jsondecode(each.value).workspace
   binding_type   = jsondecode(each.value).read_only ? "BINDING_TYPE_READ_ONLY" : "BINDING_TYPE_READ_WRITE"
@@ -36,7 +40,8 @@ resource "databricks_workspace_binding" "catalogs" {
 }
 
 resource "databricks_grants" "catalogs" {
-  for_each = { for k, v in local.catalogs_info : k => v if lookup(v, "grants", null) != null }
+  for_each   = { for k, v in local.catalogs_info : k => v if lookup(v, "grants", null) != null }
+  depends_on = [databricks_catalog.this]
 
   catalog = each.key
 
