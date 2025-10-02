@@ -5,6 +5,7 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [aad-dbx-sync](aad-dbx-sync) allows to synchronize users/groups/service principals from Azure Active Directory into Databricks Workspace.
 * [adb-workspace-cmk-rbac](adb-workspace-cmk-rbac) shows how to create Azure Databricks workspace with Customer Managed Keys encryption enabled that uses Azure Key Vault with RBAC enabled instead of Access policies.
 * [adf-dbx-demo](adf-dbx-demo) shows how to configure different authentication methods for Azure Data Factory links to Azure Databricks.
+* [adb-sep](adb-sep) demonstrates deployment of Azure Databricks workspace with Storage Service Endpoints Policy enforcement
 * [ado-adb-sp-git](ado-adb-sp-git) shows how to set credentials federation for Azure Service Principal to connect to Azure DevOps repository from Databricks.
 * [akv-to-db-secrets](akv-to-db-secrets) shows how to replicate secrets from Azure Key Vault into the Databricks Secrets scope (for example, to access them in another cloud).
 * [azure-hub-spokes-multiple-ws](azure-hub-spokes-multiple-ws) shows possible multi-module organization for deployment of Azure Databricks workspaces in hub-and-spoke architecture with separation of prod and dev workspaces, together with groups assignments to specific workspace, creation of shared resources, etc.
