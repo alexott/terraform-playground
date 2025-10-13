@@ -1,19 +1,3 @@
-# DBX Global policy - it could be defined globally for all regions
-resource "azurerm_subnet_service_endpoint_storage_policy" "dbx" {
-  name                = "${var.prefix}-DBX-Global"
-  resource_group_name = var.rg_name
-  location            = var.rg_location
-  tags                = var.tags
-  definition {
-    name        = "${var.prefix}-DBX-Global"
-    description = "DBX Global policy"
-    service     = "Global"
-    service_resources = [
-      "/services/Azure/Databricks",
-    ]
-  }
-}
-
 # UC Regional policy - it could be defined for each region separately
 resource "azurerm_subnet_service_endpoint_storage_policy" "uc" {
   name                = "${var.prefix}-UC-Regional-${var.rg_location}"
@@ -25,6 +9,16 @@ resource "azurerm_subnet_service_endpoint_storage_policy" "uc" {
     description       = "UC Regional policy"
     service           = "Microsoft.Storage"
     service_resources = var.uc_storage_account_ids
+  }
+
+  # We need it because we couldn't modify it later when NIP is attached
+  definition {
+    name        = "${var.prefix}-DBX-Global"
+    description = "DBX Global policy"
+    service     = "Global"
+    service_resources = [
+      "/services/Azure/Databricks",
+    ]
   }
 }
 
@@ -41,5 +35,15 @@ resource "azurerm_subnet_service_endpoint_storage_policy" "dbfs" {
     description       = "DBFS policy"
     service           = "Microsoft.Storage"
     service_resources = [local.dbfs_storage_account_id]
+  }
+  
+  # We need it because we couldn't modify it later when NIP is attached
+  definition {
+    name        = "${var.prefix}-DBX-Global"
+    description = "DBX Global policy"
+    service     = "Global"
+    service_resources = [
+      "/services/Azure/Databricks",
+    ]
   }
 }

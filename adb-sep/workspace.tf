@@ -33,8 +33,7 @@ resource "azurerm_subnet" "host" {
   service_endpoints = var.service_endpoints
   service_endpoint_policy_ids = [
     azurerm_subnet_service_endpoint_storage_policy.dbfs.id,
-    azurerm_subnet_service_endpoint_storage_policy.uc.id,
-    azurerm_subnet_service_endpoint_storage_policy.dbx.id,
+    azurerm_subnet_service_endpoint_storage_policy.uc.id
   ]
 
   delegation {
