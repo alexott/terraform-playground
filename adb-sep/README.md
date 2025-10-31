@@ -6,7 +6,7 @@ This folder contains a Terraform code that demonstrates the usage of storage end
 
 ## Usage
 
-Requires AzureRM provider with merged PR [#30762](https://github.com/hashicorp/terraform-provider-azurerm/pull/30762).
+Requires AzureRM provider 4.51.0 or higher.
 
 Create a `terraform.tfvars` file with the following parameters:
 
@@ -41,13 +41,13 @@ After workspace is deployed, create a non-serverless cluster, and check NAT Gate
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=4.46.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=4.51.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.46.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.51.0 |
 
 ## Modules
 
@@ -68,7 +68,6 @@ No modules.
 | [azurerm_subnet_network_security_group_association.container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_subnet_network_security_group_association.host](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_subnet_service_endpoint_storage_policy.dbfs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_service_endpoint_storage_policy) | resource |
-| [azurerm_subnet_service_endpoint_storage_policy.dbx](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_service_endpoint_storage_policy) | resource |
 | [azurerm_subnet_service_endpoint_storage_policy.uc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_service_endpoint_storage_policy) | resource |
 | [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |
 
