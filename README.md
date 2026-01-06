@@ -23,3 +23,4 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [jobs-demo](jobs-demo) demonstrate how to create a simple Databricks workflow with multiple tasks inside.
 * [ncc-plus-storage](ncc-plus-storage) shows how to configure Azure Storage Firewall with subnets from Azure Databricks Network Connectivity Config to allow access to the data from Serverless services.
 * [plan-changes](plan-changes) script that shows a summary of Terraform plan changes
+* [rfc6598](rfc6598) deployment of an Azure Databricks workspace with a secure hub-and-spoke network architecture using RFC 6598 (Shared Address Space) IP ranges.
