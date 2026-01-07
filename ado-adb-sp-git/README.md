@@ -36,3 +36,45 @@ After all things are configured, just follow the standard flow:
 After `terraform apply` the changes should be visible in the Entra ID, and Git folder will be created in a home folder of Azure service principal inside the Databricks workspace.
 
 ![Federated credentials for a service principal](images/SP-Entra-federation.png)
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 3.3.0 |
+| <a name="requirement_databricks"></a> [databricks](#requirement\_databricks) | 1.78.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 3.3.0 |
+| <a name="provider_databricks"></a> [databricks](#provider\_databricks) | 1.77.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azuread_application_federated_identity_credential.this](https://registry.terraform.io/providers/hashicorp/azuread/3.3.0/docs/resources/application_federated_identity_credential) | resource |
+| [databricks_git_credential.ado](https://registry.terraform.io/providers/databricks/databricks/1.78.0/docs/resources/git_credential) | resource |
+| [databricks_repo.this](https://registry.terraform.io/providers/databricks/databricks/1.78.0/docs/resources/repo) | resource |
+| [azuread_application.this](https://registry.terraform.io/providers/hashicorp/azuread/3.3.0/docs/data-sources/application) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_ado_repo_url"></a> [ado\_repo\_url](#input\_ado\_repo\_url) | HTTPS URL of a Git repository in Azure DevOps | `string` | n/a | yes |
+| <a name="input_databricks_host"></a> [databricks\_host](#input\_databricks\_host) | Hostname of Azure Databricks Workspace | `string` | n/a | yes |
+| <a name="input_entra_client_id"></a> [entra\_client\_id](#input\_entra\_client\_id) | Client ID of existing service principal in Entra ID | `string` | n/a | yes |
+| <a name="input_entra_client_secret"></a> [entra\_client\_secret](#input\_entra\_client\_secret) | Client Secret of existing service principal in Entra ID | `string` | n/a | yes |
+| <a name="input_entra_tenant_id"></a> [entra\_tenant\_id](#input\_entra\_tenant\_id) | Entra Tenant ID | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

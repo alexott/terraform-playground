@@ -91,4 +91,63 @@ The firewall rules allow connectivity to:
 This configuration uses the local `vnet_with_ws` module to deploy the Databricks workspace and associated networking resources.
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~>4.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~>4.0 |
+| <a name="provider_dns"></a> [dns](#provider\_dns) | n/a |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_vnet_with_ws"></a> [vnet\_with\_ws](#module\_vnet\_with\_ws) | ./modules/vnet_with_ws | n/a |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_firewall.hub_firewall](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall) | resource |
+| [azurerm_firewall_application_rule_collection.application_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_application_rule_collection) | resource |
+| [azurerm_firewall_network_rule_collection.network_rules](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_network_rule_collection) | resource |
+| [azurerm_public_ip.hub_firewall_public_ip](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
+| [azurerm_subnet.hub_firewall_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
+| [azurerm_virtual_network.hub_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |
+| [azurerm_virtual_network_peering.firewall_vnet_to_hub_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
+| [dns_a_record_set.eventhubs](https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set) | data source |
+| [dns_a_record_set.metastores](https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set) | data source |
+| [dns_a_record_set.scc_relay](https://registry.terraform.io/providers/hashicorp/dns/latest/docs/data-sources/a_record_set) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_databricks_fqdns"></a> [databricks\_fqdns](#input\_databricks\_fqdns) | List of Databricks FQDNs (storage accounts, etc.) | `list(string)` | n/a | yes |
+| <a name="input_eventhubs"></a> [eventhubs](#input\_eventhubs) | List of event hubs hosts | `list(string)` | n/a | yes |
+| <a name="input_hub_firewall_subnet_cidr"></a> [hub\_firewall\_subnet\_cidr](#input\_hub\_firewall\_subnet\_cidr) | CIDR for the hub firewall subnet | `string` | n/a | yes |
+| <a name="input_hub_vnet_cidr"></a> [hub\_vnet\_cidr](#input\_hub\_vnet\_cidr) | CIDR for the hub VNet | `string` | n/a | yes |
+| <a name="input_metastores"></a> [metastores](#input\_metastores) | List of Hive metastore hosts | `list(string)` | n/a | yes |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix for the resource names | `string` | n/a | yes |
+| <a name="input_rg_location"></a> [rg\_location](#input\_rg\_location) | Location of the resource group to deploy resources to | `string` | n/a | yes |
+| <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | Name of the resource group to deploy resources to | `string` | n/a | yes |
+| <a name="input_scc_relay"></a> [scc\_relay](#input\_scc\_relay) | List of SCC relay hosts | `list(string)` | n/a | yes |
+| <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | Azure subscription ID to use | `string` | n/a | yes |
+| <a name="input_webapp_ips"></a> [webapp\_ips](#input\_webapp\_ips) | List of webapp IPs | `list(string)` | n/a | yes |
+| <a name="input_additional_allowed_fqdns"></a> [additional\_allowed\_fqdns](#input\_additional\_allowed\_fqdns) | List of additional allowed FQDNs | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resources | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_bastion_public_ip"></a> [bastion\_public\_ip](#output\_bastion\_public\_ip) | n/a |
+| <a name="output_databricks_workspace_id"></a> [databricks\_workspace\_id](#output\_databricks\_workspace\_id) | n/a |
+| <a name="output_databricks_workspace_url"></a> [databricks\_workspace\_url](#output\_databricks\_workspace\_url) | n/a |
 <!-- END_TF_DOCS -->

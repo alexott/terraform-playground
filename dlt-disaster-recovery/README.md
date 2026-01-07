@@ -31,3 +31,29 @@ The Terraform module receives a number of variables to configure DLT pipeline:
 * `pipeline_edition` - DLT pipeline edition (default `CORE`).
 * `notebooks` - list of notebooks to use in the DLT pipeline.  Currently notebooks are stored in the module's subdirectory, but this logic could be changed.
 * `notebooks_directory` - base path for notebooks in the workspace
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->
