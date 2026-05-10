@@ -21,6 +21,7 @@ Different snippets of Terraform code. Primarily around Databricks:
 * [git-credential-for-sp](git-credential-for-sp) shows how to set Git credential for Databricks Service Principal on AWS or GCP.
 * [git-proxy](git-proxy) shows how to set up a Databricks Git Proxy cluster for connectivity to the private Git repositories.
 * [jobs-demo](jobs-demo) demonstrate how to create a simple Databricks workflow with multiple tasks inside.
+* [skills-installer](skills-installer) provides a Terraform module that uploads local Assistant skill folders (with `SKILL.md`) into workspace paths under `.assistant/skills/` for the current user or globally under `/Workspace`. See [modules/install-assistant-skills/README.md](skills-installer/modules/install-assistant-skills/README.md).
 * [ncc-plus-storage](ncc-plus-storage) shows how to configure Azure Storage Firewall with subnets from Azure Databricks Network Connectivity Config to allow access to the data from Serverless services.
 * [plan-changes](plan-changes) script that shows a summary of Terraform plan changes
 * [rfc6598](rfc6598) deployment of an Azure Databricks workspace with a secure hub-and-spoke network architecture using RFC 6598 (Shared Address Space) IP ranges.
